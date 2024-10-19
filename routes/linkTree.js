@@ -20,12 +20,28 @@ linkTreeRouter.post("/getLinkTree", async function (req,res) {
 })
 
 linkTreeRouter.post("/createLinkTree", async function(req,res) {
-    const {username, links, imageUrl} = req.body
+    const {username, links, imageUrl, clerkId} = req.body
+
+    if (!username || !links || !imageUrl || !clerkId) {
+        return res.status(500);
+    }
 
     try {
-        await linkTreeModel.create({username, userLinks: links, imageUrl})
+        await linkTreeModel.create({username, userLinks: links, imageUrl, clerkId})
 
         return res.status(201).json({message: "link tree created"})
+    } catch (error) {
+        console.log("Error", err)
+        return res.status(500).json({message: "Internal Server Error"})
+    }
+})
+
+linkTreeRouter.post("/getAllLinkTrees", async function(req,res) {
+    const {clerkId} = req.body;
+
+    try {
+        const res = await linkTreeModel.find({clerkId});
+        return res.status(200).send(res)
     } catch (error) {
         console.log("Error", err)
         return res.status(500).json({message: "Internal Server Error"})
