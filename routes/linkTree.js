@@ -48,7 +48,7 @@ linkTreeRouter.post("/getAllLinkTrees", async function(req,res) {
     }
 })
 
-linkTreeRouter.delete("/deleteLinkTree", async function (req,res) {
+linkTreeRouter.post("/deleteLinkTree", async function (req,res) {
     const {clerkId, username} = req.body
     console.log(req.body);
     if (!clerkId) return res.status(500);
