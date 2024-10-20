@@ -54,7 +54,7 @@ linkTreeRouter.post("/deleteLinkTree", async function (req,res) {
     if (!clerkId) return res.status(500);
 
     try {   
-        await linkTreeModel.remove({clerkId, username})
+        await linkTreeModel.deleteOne({clerkId, username})
         return res.status(200);
     } catch (error) {
         console.log(error)
