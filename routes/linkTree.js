@@ -43,7 +43,7 @@ linkTreeRouter.post("/getAllLinkTrees", async function(req,res) {
         const res = await linkTreeModel.find({clerkId});
         return res.status(200).send(res)
     } catch (error) {
-        console.log("Error", err)
+        console.log("Error", error)
         return res.status(500).json({message: "Internal Server Error"})
     }
 })
