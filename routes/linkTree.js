@@ -48,4 +48,20 @@ linkTreeRouter.post("/getAllLinkTrees", async function(req,res) {
     }
 })
 
+linkTreeRouter.delete("/deleteLinkTree", async function (req,res) {
+    const {clerkId, username} = req.body
+
+    if (!clerkId) return res.status(500);
+
+    try {   
+        await linkTreeModel.deleteOne({clerkId, username})
+        return res.status(200);
+    } catch (error) {
+        console.log(error)
+        return res.status(500);
+    }
+
+    
+})
+
 module.exports = {linkTreeRouter: linkTreeRouter}
